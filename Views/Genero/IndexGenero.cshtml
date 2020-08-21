@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewData["Title"] = "Generos";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<br />
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>@TempData["MensagemSucesso"]</strong>
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>@TempData["MensagemErro"]</strong>
+    </div>
+}
+
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Gêneros</h3>
+    </div>
+</div>
+
+<br />
+
+@if (ViewBag.Generos != null)
+{
+    <form method="post" action="/netfilmes/generos/remover/selecionados">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a href="/netfilmes/generos/cadastro" class="btn btn-primary">Cadastrar</a>
+                    </div>
+
+                    <div class="col-md-3">
+                        <button class="btn btn-danger">Deletar Selecionados</button>
+                    </div>
+                </div>
+
+                <br /><br />
+
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>NOME</th>
+                                <th>ATIVO</th>
+                                <th>FILMES</th>
+                                <th>OPERAÇÃO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var genero in ViewBag.Generos)
+                             {
+                                 <tr>
+                                     <td><input type="checkbox" value="@genero.Id" name="generosId"></td>
+                                     <td>@genero.Id</td>
+                                     <td>@genero.Nome</td>
+                                     <td>@(genero.Ativo ? "ATIVO" : "INATIVO")</td>
+                                     <td>
+                                        @if (genero.Filmes != null)
+                                        {
+                                            <ul style="list-style-type: none; padding-left:0;">
+                                                
+                                                @foreach (var filme in genero.Filmes)
+                                                {
+                                                    <li>
+                                                        <input type="checkbox" value="@filme.Id" name="filmesId"/> @filme.Nome
+                                                    </li>
+                                                }
+                                        
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <strong style="color: red;">N/A</strong>
+                                        }
+                                     </td>
+                                     <td>
+                                         <a href="/netfilmes/generos/cadastro/@genero.Id" class="btn btn-primary">Alterar</a>
+                                         <a href="/netfilmes/generos/remover/@genero.Id" class="btn btn-danger">Deletar</a>
+                                     </td>
+                                 </tr>
+
+                             }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+
+

@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Cadastro";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+
+<br />
+
+<div class="row">
+    <div class="col-md-8">
+        <h4>Cadastro</h4>
+
+        <form method="post" action="/netfilmes/generos/salvar">
+            <input type="hidden" name="Id" value="@(ViewBag.Genero != null ? ViewBag.Genero.Id : "")" />
+
+            <div class="form-group">
+                <label>Nome</label>
+                <input type="text" class="form-control" name="Nome" value="@(ViewBag.Genero != null ? ViewBag.Genero.Nome : "")">
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="Ativo" value="true" @(ViewBag.Genero != null && ViewBag.Genero.Ativo ? "checked" : "")> Ativo
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</div>
+

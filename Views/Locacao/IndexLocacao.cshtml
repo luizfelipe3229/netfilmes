@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewData["Title"] = "Locação";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<br />
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>@TempData["MensagemSucesso"]</strong>
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>@TempData["MensagemErro"]</strong>
+    </div>
+}
+
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Locações</h3>
+    </div>
+</div>
+
+<br />
+
+@if (ViewBag.Locacoes != null)
+{
+<form method="post" action="/netfilmes/locacao/desalocar">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>CPF DO CLIENTE</th>
+                                <th>FILMES</th>
+                                <th>DATA DE LOCAÇÃO</th>
+                                <th>OPERAÇÕES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var locacao in ViewBag.Locacoes)
+                            {
+                                <tr>
+                                    <td>@locacao.Id</td>
+                                    <td>@locacao.Cpf</td>
+                                    <td>
+                                        @if (locacao.Filmes != null && locacao.Filmes.Count > 0)
+                                        {
+                                            <ul style="list-style-type: none; padding-left:0;">
+
+                                                @foreach (var filme in locacao.Filmes)
+                                                {
+                                                    <li>
+                                                        <input type="checkbox" value="@filme.Id" name="filmesId" /> @filme.Nome
+                                                    </li>
+                                                }
+
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <strong style="color: red;">N/A</strong>
+                                        }
+                                    </td>
+                                    <td>@locacao.DataDaLocacao.ToString("dd/MM/yyyy")</td>
+                                    <td>
+                                        <button class="btn btn-primary">DESALOCAR</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    
+}
+
+<br />
+<hr />
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Filmes Não Locados</h3>
+    </div>
+</div>
+
+<br />
+
+@if (ViewBag.FilmesNaoLocados != null)
+{
+    <form method="post" action="/netfilmes/locacao/cadastrar">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" name="Cpf" class="form-control" maxlength="11" placeholder="CPF DO CLIENTE" />
+                    </div>
+
+                    <div class="col-md-2">
+                        <button class="btn btn-primary">Realizar Locação</button>
+                    </div>
+                </div>
+
+                <br /><br />
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>ID</th>
+                                    <th>NOME</th>
+                                    <th>GENERO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var filme in ViewBag.FilmesNaoLocados)
+                                {
+                                    <tr>
+                                        <td><input type="checkbox" value="@filme.Id" name="filmesId"></td>
+                                        <td>@filme.Id</td>
+                                        <td>@filme.Nome</td>
+                                        <td>@filme.Genero.Nome</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+}
+else
+{
+    <p style="color:red;"><strong>Todos os filmes estão locados.</strong></p>
+}
+

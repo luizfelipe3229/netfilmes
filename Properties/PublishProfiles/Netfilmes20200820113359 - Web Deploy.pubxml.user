@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Esse arquivo é usado pelo processo de publicação/pacote do seu projeto Web. É possível personalizar o comportamento deste processo
+ao editar este arquivo MSBuild. Para saber mais sobre isso, visite https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAw7pO+KIY/UyEQ5vJMaixsgAAAAACAAAAAAAQZgAAAAEAACAAAABatuTFGpllAqVEmdS4DMZ+9OCD5MP4VnK6NEsGlokPEAAAAAAOgAAAAAIAACAAAAASxiehVP8N2Ju3QyeVdq8s41jyNXoEae7rOj8MqHQ9xYAAAAD9G/9iFoa8RwIszhToPy9gbctA42+XfQkOYFHT6BrRxyREhmQ5RQOoxwdpw786NaFoOshqrm7HohgNnwpNZEc1UzE1Y/9/IPhjcN2fy0znvfzhKWYAPJoA4vS0B6kZ06W/WMO87CQ1RldnQ6ttV+vIvujBrh+qz5WzfSkwidSkx0AAAADtmBZjMhXOJ+xLrtcleAEEbjsUyXxbhO/6FP92NraPKFfFpJPZ0eYgC1YcY/Sd6YnGfOAqOBv9Eu1JQzXZbAl6</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <EFMigrations Include="Netfilmes.Repository.ApplicationContext">
+      <Value>Data Source=tcp:netfilmes20200820113359dbserver.database.windows.net,1433%3bInitial Catalog=Netfilmes20200820113359_db%3bUser Id=lfelipe%40netfilmes20200820113359dbserver%3bPassword=77KM55s4</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

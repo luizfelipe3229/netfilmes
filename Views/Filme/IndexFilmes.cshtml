@@ -1,0 +1,231 @@
+﻿
+@{
+    ViewData["Title"] = "FilmesDisponiveis";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<br />
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>@TempData["MensagemSucesso"]</strong>
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>@TempData["MensagemErro"]</strong>
+    </div>
+}
+
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Filmes</h3>
+    </div>
+</div>
+
+<br />
+
+<form method="post" action="/netfilmes/filmes/remover/selecionados">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="/netfilmes/filmes/cadastro" class="btn btn-primary">Cadastrar</a>
+                </div>
+
+                <div class="col-md-3">
+                    <button class="btn btn-danger">Deletar Selecionados</button>
+                </div>
+
+                <div class="col-md-3">
+                    <a href="/netfilmes/locacao" class="btn btn-primary">Locação</a>
+                </div>
+            </div>
+
+            <br /><br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>NOME</th>
+                                <th>ATIVO</th>
+                                <th>GENERO</th>
+                                <th>LOCADO</th>
+                                <th>OPERAÇÃO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ViewBag.Filmes != null && ViewBag.Filmes.Count > 0)
+                            {
+                                @foreach (var filme in ViewBag.Filmes)
+                                {
+                                    <tr>
+                                        <td><input type="checkbox" value="@filme.Id" name="filmesId"></td>
+                                        <td>@filme.Id</td>
+                                        <td>@filme.Nome</td>
+                                        <td>@(filme.Ativo ? "ATIVO" : "INATIVO")</td>
+                                        <td>@(filme.Genero != null ? filme.Genero.Nome : "SEM GÊNERO")</td>
+                                        <td>@(filme.Locacao != null ? "SIM" : "NÃO")</td>
+                                        <td>
+                                            <a href="/netfilmes/filmes/cadastro/@filme.Id" class="btn btn-primary">Alterar</a>
+                                            <a href="/netfilmes/filmes/remover/@filme.Id" class="btn btn-danger">Deletar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        <strong>Não existem filmes cadastrados.</strong>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<br />
+<hr />
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Gêneros</h3>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOME</th>
+                <th>ATIVO</th>
+                <th>FILMES</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.Generos != null && ViewBag.Generos.Count > 0)
+            {
+                @foreach (var genero in ViewBag.Generos)
+                {
+                    <tr>
+                        <td>@genero.Id</td>
+                        <td>@genero.Nome</td>
+                        <td>@(genero.Ativo ? "ATIVO" : "INATIVO")</td>
+                        <td>
+                            @if (genero.Filmes != null)
+                            {
+                                <ul style="list-style-type: none; padding-left:0;">
+                                    @foreach (var filme in genero.Filmes)
+                                    {
+                                        <li>@filme.Nome</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <strong style="color: red;">N/A</strong>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" class="text-center">
+                        <strong>Não existem gêneros cadastrados.</strong>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<br />
+<hr />
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Locações</h3>
+    </div>
+</div>
+
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>CPF DO CLIENTE</th>
+                            <th>FILMES</th>
+                            <th>DATA DE LOCAÇÃO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.Locacoes != null && ViewBag.Locacoes.Count > 0)
+                        {
+                            @foreach (var locacao in ViewBag.Locacoes)
+                            {
+                                <tr>
+                                    <td>@locacao.Id</td>
+                                    <td>@locacao.Cpf</td>
+                                    <td>
+                                        @if (locacao.Filmes != null)
+                                        {
+                                            <ul style="list-style-type: none; padding-left:0;">
+                                                @foreach (var filme in locacao.Filmes)
+                                                {
+                                                    <li>@filme.Nome</li>
+                                                }
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <strong style="color: red;">N/A</strong>
+                                        }
+                                    </td>
+                                    <td>@locacao.DataDaLocacao.ToString("dd/MM/yyyy")</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" class="text-center">
+                                    <strong>Não existem locações cadastradas.</strong>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,67 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>..:: Login ::..</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+    </style>
+
+    <link href="~/css/login.css" rel="stylesheet">
+
+</head>
+<body class="text-center">
+    <form method="post" action="/netfilmes/autenticar" class="form-signin">
+
+        @if (TempData["MensagemSucesso"] != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>@TempData["MensagemSucesso"]</strong>
+            </div>
+        }
+
+        @if (TempData["MensagemErro"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>@TempData["MensagemErro"]</strong>
+            </div>
+        }
+
+        <h1 class="h3 mb-3 font-weight-normal">Acessar Sistema</h1>
+        <label for="inputEmail" class="sr-only">Nome</label>
+        <input type="text" name="Nome" id="inputEmail" class="form-control" placeholder="Nome" required autofocus>
+        <label for="inputPassword" class="sr-only">Senha</label>
+        <input type="password" name="Senha" id="inputPassword" class="form-control" placeholder="Senha" required>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+            </div>
+            <div class="col-md-6">
+                <a href="/netfilmes/usuario/cadastro" class="btn btn-primary btn-block">Cadastrar</a>
+            </div>
+        </div>
+
+    </form>
+
+    <script src="~/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

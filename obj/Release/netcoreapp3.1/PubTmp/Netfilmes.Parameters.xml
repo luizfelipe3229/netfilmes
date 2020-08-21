@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Netfilmes20200820113359" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\FELIPE\\source\\repos\\Netfilmes\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="Netfilmes.Repository.ApplicationContext" description="" value="Data Source=tcp:netfilmes20200820113359dbserver.database.windows.net,1433;Initial Catalog=Netfilmes20200820113359_db;User Id=lfelipe@netfilmes20200820113359dbserver;Password=77KM55s4" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\FELIPE\\source\\repos\\Netfilmes\\obj\\Release\\netcoreapp3\.1\\PubTmp\\EFSQLScripts\\Netfilmes\.Repository\.ApplicationContext\.sql$" />
+  </parameter>
+</parameters>
